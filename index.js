@@ -31,6 +31,14 @@ async function run() {
             const query = {_id: ObjectId(id)};
             const product = await warehouseStocks.findOne(query);
             res.send(product);
+        });
+
+        //Delete
+        app.delete('/products/:id', async (req, res)=>{
+            const id = req.params.id;
+            const query = {_id: ObjectId(id)};
+            const result = await warehouseStocks.deleteOne(query);
+            res.send(result);
         })
         
     } finally {
