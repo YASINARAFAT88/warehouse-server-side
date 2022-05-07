@@ -40,6 +40,13 @@ async function run() {
             const result = await warehouseStocks.deleteOne(query);
             res.send(result);
         })
+
+        //Post
+        app.post('/products', async(req, res)=>{
+            const newStock = req.body;
+            const result = await warehouseStocks.insertOne(newStock);
+            res.send(result);
+        })
         
     } finally {
 
