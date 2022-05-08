@@ -41,6 +41,21 @@ async function run() {
             res.send(result);
         })
 
+        //Update Quantity
+        app.put('/products/:id', async (req, res)=>{
+            const id = req.params.id;
+            const item = req.body;
+            const filter = {_id: ObjectId(id)};
+            const option = { upsert: true };
+            const upDateDoc = {
+                $set: {
+                    name: item.name
+                }
+            }
+            const result = await warehouseStocks.updateOne(filter, upDateDoc, option);
+            res.send(result)
+        })
+
         //Post
         app.post('/products', async(req, res)=>{
             const newStock = req.body;
@@ -62,3 +77,4 @@ app.get('/', (req, res) => {
 app.listen(port, () => {
     console.log('Listening to port', port)
 })
+
